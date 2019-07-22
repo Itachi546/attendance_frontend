@@ -1,25 +1,55 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/layout/header';
+
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import Home from './components/pages/Home';
+import InstructorList from './components/pages/InstructorList';
+import ClassList from './components/pages/ClassList';
+import SubjectList from './components/pages/SubjectList'
+import Report from './components/pages/Report'
+
+//@Todo pass the data from link
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+
+        <Route exact path='/' render={props => (
+          <Home {...props} onClickRow={(subjectDetail) => {
+            props.history.push({
+              pathname: '/report',
+              state: subjectDetail
+            });
+          }} />
+        )} />
+
+        <Route path='/classes' render={props => (
+          <ClassList {...props} onClickRow={(classDetail) => {
+            props.history.push({
+              pathname: '/subjectlist',
+              state: classDetail
+            })
+          }} />
+        )} />
+
+        <Route exact path='/subjectlist' render={props => (
+          <SubjectList {...props} onClickRow={(subjectDetail) => {
+            props.history.push({
+              pathname: '/report',
+              state: subjectDetail
+            });
+          }} />
+        )} />
+
+
+        <Route path='/instructor' component={InstructorList} />
+        <Route path='/report' component={Report} />
+      </div>
+    </Router>
   );
 }
 
