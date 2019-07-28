@@ -1,34 +1,36 @@
-import React, { Component } from 'react'
-import SearchBar from '../SearchBar'
-import {url} from '../../config'
-import Default from '../pages/Default'
-
+import React, { Component } from 'react';
+import SearchBar from '../SearchBar';
+import { url } from '../../config';
+import Default from '../pages/Default';
+import CustomTable from '../CustomTable';
 export default class InstructorList extends Component {
     state = {
-        data:[]
+        data: []
     }
-    componentDidMount(){
+    componentDidMount() {
         fetch(url + 'instructor')
-        .then(res=>(
-            res.json()
-        ))
-        .then(json=>{
-            this.setState({
-                data:json,
-            });
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+            .then(res => (
+                res.json()
+            ))
+            .then(json => {
+                this.setState({
+                    data: json,
+                });
+            })
+            .catch(err => {
+                console.log(err);
+            })
     }
+    
     render() {
         return (
-            this.state.data.length === 0? <Default/>: <div>
-                <SearchBar placeholder='Search Instructor'/>
-                <h1>Instructors</h1>
-                {this.state.data.map((val, index)=>(
-                    <li key={index}>{val.name}</li>
-                ))}
+            this.state.data.length === 0 ? <Default /> : <div className="container-fluid">
+                <SearchBar placeholder='Search Instructor' />
+                <h3 className="mt-3 text-center">Instructors</h3>
+                <CustomTable header={Object.getOwnPropertyNames(this.state.data[0])}
+                    data={this.state.data}
+                    onClickRow={() => { }}
+                />
             </div>
         )
     }

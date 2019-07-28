@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { url } from '../../config'
+import React, { Component } from 'react';
+import { url } from '../../config';
+import Table from 'react-bootstrap/Table';
 export default class Report extends Component {
 
     state = {
         header: [],
-        data: []
+        data: [],
     };
 
     //@NOte validation between original data and ordered data
@@ -23,7 +24,10 @@ export default class Report extends Component {
                     data: json.map((val, index) => {
                         const status = val.status.split(',');
                         return [val.rollNo, val.name, ...status];
-                    })
+                    }),
+                    className:data.class,
+                    subject:data.subject,
+                    instructor:data.instructor
                 })
                 return json;
             })
@@ -52,7 +56,11 @@ export default class Report extends Component {
     render() {
         return (
             <div>
-                <table className="table">
+                <h3 className="m-3 text-center"> Attendance Record</h3>
+                <h6 className="mt-1" style={subheading}> Instructor: {this.state.instructor} </h6>
+                <h6 className="float-left" style={subheading}> Class: {this.state.className} </h6>
+                <h6 className="float-right mr-1" style={subheading}> Subject: {this.state.subject} </h6>
+                <Table className="table" striped bordered hover responsive size="sm">
                     <tbody>
                         <tr>
                             {
@@ -65,8 +73,13 @@ export default class Report extends Component {
                             })
                         }
                     </tbody>
-                </table>
+                </Table>
             </div>
-        )
+        );
     }
+}
+
+
+const subheading = {
+    lineHeight:"15px"
 }

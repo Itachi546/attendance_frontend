@@ -1,30 +1,15 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import FormControl from 'react-bootstrap/FormControl';
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 export default class SearchBar extends Component {
     render() {
         return (
-           <form style={styles.form}>
-               <input style = {styles.inputText} type ="text" placeholder={this.props.placeholder}/>
-               <input style={styles.button} type="submit" value = "Submit"/>
-            </form>
+           <Form inline className="mt-3">
+               <FormControl type="text" placeholder={this.props.placeholder} className="mr-sm-2"/>
+               <Button variant="outline-success">Search</Button>
+            </Form>
         )
-    }
-}
-
-
-const styles = {
-    form : {
-        margin:'10px',
-    },
-    inputText:{
-    },
-    button:{
-        marginLeft:'10px',
-        marginRight:'10px',
-        border:'none',
-        color:'white',
-        backgroundColor:'black',
-        width:'80px',
-        height:'25px',
     }
 }

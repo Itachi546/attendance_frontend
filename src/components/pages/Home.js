@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Table from '../table'
+import CustomTable from '../CustomTable'
 import { url } from '../../config.js'
 import Default from '../pages/Default'
 
@@ -22,15 +22,13 @@ export default class Home extends Component {
     }
     render() {
         return (
-            <div style={bodyStyle}>
+            <div className="container-fluid">
+                <h3 className="text-center mt-4">Recents</h3>
                 {
-                    this.state.data.length === 0 ? <Default /> : <Table data={this.state.data} header={Object.getOwnPropertyNames(this.state.data[0])} onClickRow={(index) => this.props.onClickRow(this.state.data[index])} />
+                    this.state.data.length === 0 ? <Default /> : <CustomTable data={this.state.data} header={Object.getOwnPropertyNames(this.state.data[0])} onClickRow={(index) => this.props.onClickRow(this.state.data[index])} />
 
                 }
             </div>
         )
     }
-}
-
-const bodyStyle = {
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import SearchBar from '../SearchBar'
 import {url} from '../../config'
 import Default from '../pages/Default'
-import Table from '../table'
+import CustomTable from '../CustomTable'
 
 export default class ClassList extends Component {
     state= {
@@ -25,19 +25,11 @@ export default class ClassList extends Component {
     render() {
         return (
             this.state.data.length === 0 ? <Default/> :
-            <div>
+            <div className="container-fluid">
                 <SearchBar placeholder='Search class'/>
-                <h1> Class </h1>
-                {/*this.state.data.map((val, index)=>{
-                    return <li key={index}><Link 
-                    to= {{
-                        pathname:'/subjectlist',
-                        state:{
-                            data:val.name
-                        }
-                }} >{val.name}</Link></li>
-                })*/
-                 <Table header={Object.getOwnPropertyNames(this.state.data[0])} data={this.state.data} onClickRow={(index)=>{
+                <h3 className="text-center mt-3"> Class </h3>
+                {
+                 <CustomTable header={Object.getOwnPropertyNames(this.state.data[0])} data={this.state.data} onClickRow={(index)=>{
                      this.props.onClickRow(this.state.data[index]);
                  }}/>
                 }
