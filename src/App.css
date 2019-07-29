@@ -1,19 +1,21 @@
 .App {
   text-align: left;
-  margin:0px;
-  padding:0px;
+  margin: 0px;
+  padding: 0px;
   font-family: sans-serif, Helvetica, Arial;
 }
-.table{
-    margin-top:10px;
+.table {
+  margin-top: 10px;
+  white-space: nowrap;
 }
 
-.table tr{
+.table tr {
   cursor: pointer;
 }
 
-
+/*
 .table th{
   background-color: #4CAF50;
   color:white;
 }
+*/

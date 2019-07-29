@@ -12,7 +12,7 @@ export default class Report extends Component {
     componentDidMount() {
         const data = this.props.location.state;
         const classId = data.class;
-        const {subjectCode, instructor} = data;
+        const { subjectCode, instructor } = data;
         fetch(url + `attendance/all/${classId}/${subjectCode}/${instructor}`)
             .then(res => {
                 return res.json();
@@ -20,14 +20,11 @@ export default class Report extends Component {
             .then(json => {
                 const attendance = json[0].date.split(',');
                 this.setState({
-                    header: ['Roll','Name', ...attendance],
+                    header: ['Roll', 'Name', ...attendance],
                     data: json.map((val, index) => {
                         const status = val.status.split(',');
                         return [val.rollNo, val.name, ...status];
                     }),
-                    className:data.class,
-                    subject:data.subject,
-                    instructor:data.instructor
                 })
                 return json;
             })
@@ -47,20 +44,26 @@ export default class Report extends Component {
         return (<tr key={index}>
             {
                 data.map((val, i) => (
-                <td key={i}>{val}</td>
-        ))
-        }
+                    <td key={i}>{val}</td>
+                ))
+            }
         </tr>);
     }
 
     render() {
+        const { year, part, instructor, subject } = this.props.location.state;
+        const className = this.props.location.state.class;
         return (
-            <div>
+            <div className="container-fluid">
                 <h3 className="m-3 text-center"> Attendance Record</h3>
-                <h6 className="mt-1" style={subheading}> Instructor: {this.state.instructor} </h6>
-                <h6 className="float-left" style={subheading}> Class: {this.state.className} </h6>
-                <h6 className="float-right mr-1" style={subheading}> Subject: {this.state.subject} </h6>
-                <Table className="table" striped bordered hover responsive size="sm">
+                <h6 className="mt-1" style={subheading}> Instructor: {instructor} </h6>
+                <div className="d-inline-flex">
+                    <h6 className="float-left mt-1" style={subheading}> Class: {className} </h6>
+                    <h6 className="float-left mt-1 ml-3" style={subheading}> Year: {year} </h6>
+                    <h6 className="float-left mt-1 ml-3" style={subheading}> Part: {part} </h6>
+                </div>
+                <h6 className="float-right mt-1" style={subheading}> Subject: {subject} </h6>
+                <Table className="mt-3 table" responsive striped bordered hover size="sm">
                     <tbody>
                         <tr>
                             {
@@ -81,5 +84,5 @@ export default class Report extends Component {
 
 
 const subheading = {
-    lineHeight:"15px"
+    lineHeight: "15px"
 }

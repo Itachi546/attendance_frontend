@@ -8,16 +8,17 @@ export default class SubjectList extends Component {
         data:[],
     }
     componentDidMount(){
-        const data = this.props.location.state;
-        fetch(url + `subject/${data.name}`)
+        const {name, year, part}= this.props.location.state;
+        fetch(url + `subject/${name}/${year}/${part}`)
         .then(res=>{
             return res.json();
         })
         .then(json=>{
             this.setState({
                 data:json,
-                className:data.name
+                className:name,
             })
+
             return json;
         })
         .catch(err=>{
@@ -25,14 +26,18 @@ export default class SubjectList extends Component {
         })
     }
     render() {
-        const {className} = this.state;     
+        const {name, year, part}= this.props.location.state;
         return (
             this.state.data.length === 0 ? <Default/> : 
             <div className="container-fluid">
                 <h3 className="text-center mt-3 float">SubjectList</h3>
-                <h6 className="text-left mt-3">Class: {className} </h6>
+                <div className="d-flex">
+                <h6 className="text-left mt-3">Class: {name} </h6>
+                <h6 className="text-left mt-3 ml-3">Year: {year} </h6>
+                <h6 className="text-left mt-3 ml-3">Part: {part} </h6>
+               </div>
                 <CustomTable header = {Object.getOwnPropertyNames(this.state.data[0])} data = {this.state.data}  onClickRow={(index)=>{
-                     this.props.onClickRow({...this.state.data[index], class:className});
+                     this.props.onClickRow({...this.state.data[index], class:name, year, part});
                  }}/>
                 {
                     /*

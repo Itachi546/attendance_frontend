@@ -28,7 +28,9 @@ export default class CustomTable extends Component {
             return <div></div>
         else {
             return (
-                    <Table className="table" striped bordered hover onClick={(evt) => {
+                    <div className="container-fluid">
+                    <Table className="table" scrollX scrollY responsive striped bordered hover 
+                    onClick={(evt) => {
                         const index = evt.target.parentNode.rowIndex;
                         if (index > 0)
                             this.props.onClickRow(index - 1);
@@ -40,6 +42,7 @@ export default class CustomTable extends Component {
                             }
                         </tbody>
                     </Table>
+                    </div>
             );
         }
     }
