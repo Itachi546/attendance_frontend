@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import Dropdown from 'react-bootstrap/Dropdown';
+import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 
 export default class DropdownWrapper extends Component {
     render() {
         return (
-            <Dropdown className="mt-3" onSelect={this.props.onSelect}>
-                <Dropdown.Toggle className="mr-3" variant="success" id="dropdown-basic">
+            <MDBDropdown>
+                <MDBDropdownToggle caret color="primary" >
                     {this.props.title}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
+                </MDBDropdownToggle>
+                <MDBDropdownMenu basic>
                     {
-                        this.props.data.map((val, index) => <Dropdown.Item eventKey={val} key={index}>{val}</Dropdown.Item>)
+                        this.props.data.map((val, index) => <MDBDropdownItem  onClick = {()=>this.props.onSelect(val)}
+                        key={index}>
+                        {val}
+                        </MDBDropdownItem>)
                     }
-                </Dropdown.Menu>
-            </Dropdown>
+                </MDBDropdownMenu>
+            </MDBDropdown>
         )
     }
 }

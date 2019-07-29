@@ -40,24 +40,17 @@ export default class BarWrapper extends Component {
                         labels: this.props.data.map(val => val.subject),
                         datasets: [{
                             label: 'Total',
-                            backgroundColor: 'rgb(155, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            borderWidth:1,                            
+                            backgroundColor: '#4285F4',
                             data: this.props.data.map(val=>val.totalDay)
                         },
                         {
                             label: 'Present',
-                            backgroundColor: 'rgb(99, 255, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            borderWidth:1,
+                            backgroundColor: '#00C851',
                             data: this.props.data.map(val=>val.present)
                         },
                         {
                             label: 'Absent',
-                            backgroundColor: 'rgb(255, 99, 132)',
-                            borderColor: 'rgb(255, 99, 132)',
-                            borderWidth:1,
-                            
+                            backgroundColor: '#DC3545',
                             data: this.props.data.map(val=>(val.totalDay-val.present))
                         },
                         ]

@@ -4,9 +4,7 @@ import DropdownWrapper from '../../components/DropdownWrapper';
 import CustomTable from '../../components/CustomTable';
 export default class StudentList extends Component {
     state = {
-        currentClass: "Class",
-        currentYear: "Year",
-        currentPart: "Part",
+        currentClass: "Select Class",
         class: [],
         students: []
     }

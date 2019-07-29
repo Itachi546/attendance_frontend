@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Table from 'react-bootstrap/Table'
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
 
 export default class CustomTable extends Component {
-   
+
     renderTableHeader = (header) => {
         return header.map((val, index) => {
             return <th key={index}>{val.toUpperCase()}</th>
@@ -28,21 +28,25 @@ export default class CustomTable extends Component {
             return <div></div>
         else {
             return (
-                    <div className="container-fluid">
-                    <Table className="table" scrollX scrollY responsive striped bordered hover 
-                    onClick={(evt) => {
-                        const index = evt.target.parentNode.rowIndex;
-                        if (index > 0)
-                            this.props.onClickRow(index - 1);
-                    }}>
-                        <tbody>
+                    <MDBTable className="container"
+                        striped
+                        bordered 
+                        hover
+                        onClick={(evt) => {
+                            const index = evt.target.parentNode.rowIndex;
+                            if (index > 0)
+                                this.props.onClickRow(index - 1);
+                        }}>
+
+                        <MDBTableHead color="primary-color" textWhite>
                             <tr>{this.renderTableHeader(this.props.header)}</tr>
+                        </MDBTableHead>
+                        <MDBTableBody>
                             {
                                 this.renderTableData(this.props.header)
                             }
-                        </tbody>
-                    </Table>
-                    </div>
+                        </MDBTableBody>
+                    </MDBTable>
             );
         }
     }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { url } from '../../config';
-import Table from 'react-bootstrap/Table';
+import { MDBTable, MDBTableBody, MDBTableHead } from 'mdbreact';
+
+
 export default class Report extends Component {
 
     state = {
@@ -20,10 +22,10 @@ export default class Report extends Component {
             .then(json => {
                 const attendance = json[0].date.split(',');
                 this.setState({
-                    header: ['Roll', 'Name', ...attendance],
+                    header: ['ROLL NO', 'NAME', ...attendance, "PRESENT"],
                     data: json.map((val, index) => {
                         const status = val.status.split(',');
-                        return [val.rollNo, val.name, ...status];
+                        return [val.rollNo, val.name, ...status, `${val.present} / ${attendance.length}`];
                     }),
                 })
                 return json;
@@ -54,7 +56,7 @@ export default class Report extends Component {
         const { year, part, instructor, subject } = this.props.location.state;
         const className = this.props.location.state.class;
         return (
-            <div className="container-fluid">
+            <div>
                 <h3 className="m-3 text-center"> Attendance Record</h3>
                 <h6 className="mt-1" style={subheading}> Instructor: {instructor} </h6>
                 <div className="d-inline-flex">
@@ -63,20 +65,35 @@ export default class Report extends Component {
                     <h6 className="float-left mt-1 ml-3" style={subheading}> Part: {part} </h6>
                 </div>
                 <h6 className="float-right mt-1" style={subheading}> Subject: {subject} </h6>
-                <Table className="mt-3 table" responsive striped bordered hover size="sm">
-                    <tbody>
+                <MDBTable
+                    striped bordered hover size="sm"
+                    onClick={(evt) => {
+                        const index = evt.target.parentNode.rowIndex;
+                        if (index > 0){
+                            const selected = this.state.data[index - 1];
+                            this.props.onClickRow({
+                                rollno:selected[0],
+                                name:selected[1]
+                            })
+                        }
+                    }}
+                >
+                    <MDBTableHead>
+
                         <tr>
                             {
                                 this.renderTableHeader(this.state.header)
                             }
                         </tr>
+                    </MDBTableHead>
+                    <MDBTableBody>
                         {
                             this.state.data.map((val, index) => {
                                 return this.renderTableData(val, index);
                             })
                         }
-                    </tbody>
-                </Table>
+                    </MDBTableBody>
+                </MDBTable>
             </div>
         );
     }

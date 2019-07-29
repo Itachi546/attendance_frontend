@@ -12,10 +12,14 @@
 .table tr {
   cursor: pointer;
 }
-
 /*
 .table th{
   background-color: #4CAF50;
   color:white;
 }
 */
+
+.table td{
+  font-size: 15px;
+  font-weight: 400;
+}
