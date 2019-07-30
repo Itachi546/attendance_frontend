@@ -11,7 +11,6 @@ import Report from './components/pages/Report';
 import StudentList from './components/pages/StudentList';
 import Student from './components/pages/Student';
 import SubjectReport from './components/pages/SubjectReport';
-//@Todo pass the data from link
 
 function App() {
   return (

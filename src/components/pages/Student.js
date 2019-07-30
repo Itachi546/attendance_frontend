@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { url } from '../../config';
 import CustomTable from '../CustomTable';
 import Default from '../pages/Default'
-import BarWrapper from '../BarWrapper';
+import ChartWrapper from '../ChartWrapper';
 
 export default class Student extends Component {
     state = {
@@ -13,7 +13,6 @@ export default class Student extends Component {
         fetch(url + `student/${rollno}`)
             .then(res => res.json())
             .then(json => {
-                console.log(json);
                 this.setState({
                     data: json
                 });
@@ -35,8 +34,25 @@ export default class Student extends Component {
                     {
                         this.state.data.length > 0 ? (
                             <div>
-                                <BarWrapper
-                                    data={this.state.data}
+                                <ChartWrapper
+                                    chartType={"Bar"}
+                                    label = {this.state.data.map((val) => val.subject)}
+                                    dataset = {[{
+                                        label: 'Total',
+                                        backgroundColor: '#4285F4',
+                                        data: this.state.data.map(val=>val.totalDay)
+                                    },
+                                    {
+                                        label: 'Present',
+                                        backgroundColor: '#00C851',
+                                        data: this.state.data.map(val=>val.present)
+                                    },
+                                    {
+                                        label: 'Absent',
+                                        backgroundColor: '#DC3545',
+                                        data: this.state.data.map(val=>(val.totalDay-val.present))
+                                    },
+                                    ]}
                                 />
                                 <CustomTable header={Object.getOwnPropertyNames(this.state.data[0])}
                                     data={this.state.data}
