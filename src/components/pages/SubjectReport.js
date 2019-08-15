@@ -13,9 +13,18 @@ export default class SubjectReport extends Component {
         fetch(url + `attendance/${data.subjectCode}/${data.instructor}`)
             .then(res => res.json())
             .then(json => {
+                console.log(json);
                 this.setState({
-                    data: json
+                    data: json.map(val=>{
+                        return {
+                            "Attendance Date" : val["Attendance Date"],
+                            "Present Student": val["Present Student"],
+                            "Absent Student" : val["Total Student"] - val["Present Student"],
+                            "Total Student" : val["Total Student"]
+                        }
+                    })
                 });
+                
             })
             .catch(err => {
                 console.log(err);
@@ -58,11 +67,17 @@ export default class SubjectReport extends Component {
                             data={{
                                 labels: this.state.data.map((val) => val["Attendance Date"]),
                                 datasets: [{
-                                    label: "Total no of Present Student",
+                                    label: "Present Student",
                                     borderWidth:3,
-                                    borderColor:"#000",
+                                    borderColor:"#0F0",
                                     data: this.state.data.map(val => val["Present Student"])
-                                }]
+                                },
+                                {
+                                    label: "Absent Student",
+                                    borderWidth:3,
+                                    borderColor:"#F00",
+                                    data: this.state.data.map(val => val["Total Student"] - val["Present Student"])
+                                }],
                             }}
                         />
                     </div>

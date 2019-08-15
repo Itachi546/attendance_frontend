@@ -22,11 +22,12 @@ export default class Report extends Component {
             .then(json => {
                 const attendance = json[0].date.split(',');
                 this.setState({
-                    header: ['ROLL NO', 'NAME', ...attendance, "PRESENT"],
+                    header: ['ROLL NO', 'NAME', ...attendance, "PRESENT", "ABSENT"],
                     data: json.map((val, index) => {
                         const status = val.status.split(',');
-                        return [val.rollNo, val.name, ...status, `${val.present} / ${attendance.length}`];
+                        return [val.rollNo, val.name, ...status, val.present,  attendance.length - val.present];
                     }),
+                    totalLecture: attendance.length
                 })
                 return json;
             })
@@ -65,6 +66,7 @@ export default class Report extends Component {
                     <h6 className="float-left mt-1 ml-3" style={subheading}> Part: {part} </h6>
                 </div>
                 <h6 className="float-right mt-1" style={subheading}> Subject: {subject} </h6>
+                <h6 className="mt-1" style={subheading}> Total Lecture: {this.state.totalLecture} </h6>
                 <MDBTable
                     striped bordered hover size="sm"
                     onClick={(evt) => {

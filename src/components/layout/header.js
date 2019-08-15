@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Navigation from './Navigation'
 import "mdbreact/dist/css/mdb.css";
 
-export default class Header extends Component {
+export default class Header extends Component {j
     render() {
         const { location } = this.props;
         if (location.pathname.match('/report'))
