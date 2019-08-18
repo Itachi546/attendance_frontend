@@ -36,8 +36,10 @@ export default class InstructorList extends Component {
                 />
                 <h3 className="mt-3 text-center">Instructors</h3>
                 <CustomTable header={Object.getOwnPropertyNames(this.state.data[0])}
-                    data={this.state.data.filter((val)=> val.name.toUpperCase().startsWith(this.state.searchText.toUpperCase()))}
-                    onClickRow={() => { }}
+                    data={this.state.data.filter((val)=> val.instructor.toUpperCase().startsWith(this.state.searchText.toUpperCase()))}
+                    onClickRow={(index) => {
+                        this.props.onClickRow(this.state.data[index]);
+                    }}
                 />
             </div>
         )

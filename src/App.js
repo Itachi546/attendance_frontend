@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from './components/layout/Header';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { url } from './config';
 
 import Home from './components/pages/Home';
 import InstructorList from './components/pages/InstructorList';
@@ -11,6 +12,7 @@ import Report from './components/pages/Report';
 import StudentList from './components/pages/StudentList';
 import Student from './components/pages/Student';
 import SubjectReport from './components/pages/SubjectReport';
+import Form from './components/pages/Form';
 
 function App() {
   return (
@@ -28,15 +30,28 @@ function App() {
 
         <Route path='/classes' render={props => (
           <ClassList {...props} onClickRow={(classDetail) => {
-            props.history.push({
-              pathname: '/subjectlist',
-              state: classDetail
-            })
+            const {year, part } = classDetail;
+            const name = classDetail.class;
+            fetch(url + `subject/${name}/${year}/${part}`)
+              .then(res => {
+                return res.json();
+              })
+              .then(json => {
+                props.history.push({
+                  pathname: '/subjectlist',
+                  state: [classDetail, json]
+                })
+              })
+              .catch(err => {
+                console.log(err);
+              })
+
           }} />
         )} />
 
         <Route exact path='/subjectlist' render={props => (
           <SubjectList {...props} onClickRow={(subjectDetail) => {
+            console.log(subjectDetail);
             props.history.push({
               pathname: '/subjectReport',
               state: subjectDetail
@@ -44,7 +59,24 @@ function App() {
           }} />
         )} />
 
-        <Route path='/instructor' component={InstructorList} />
+        <Route path='/instructor' render={props => (
+          <InstructorList {...props} onClickRow={(instructorDetail) => {
+            fetch(url + `subject/single/${instructorDetail.email}`)
+            .then(res => {
+              return res.json();
+            })
+            .then(json => {
+              props.history.push({
+                pathname: '/subjectList',
+                state: [instructorDetail, json]
+              });
+    
+            })
+            .catch(err => {
+              console.log(err);
+            });
+          }} />
+        )} />
 
         <Route path='/batch' render={props => (
           <StudentList {...props} onClickRow={(data) => {
@@ -54,7 +86,9 @@ function App() {
             });
           }} />
         )} />
+
         <Route path='/student' component={Student} />
+        <Route path='/form' component={Form} />
 
         <Route path='/subjectReport' render={props => (
           <SubjectReport {...props} onClickRow={(data) => {

@@ -40,7 +40,7 @@ export default class ClassList extends Component {
                 <h3 className="text-center mt-3"> Class </h3>
                 {
                  <CustomTable header={Object.getOwnPropertyNames(this.state.data[0])}
-                              data={this.state.data.filter((val)=> val.name.toUpperCase().startsWith(this.state.searchText.toUpperCase()))}
+                              data={this.state.data.filter((val)=> val.class.toUpperCase().startsWith(this.state.searchText.toUpperCase()))}
                               onClickRow={(index)=>{
                      this.props.onClickRow(this.state.searchData[index]);
                  }}/>

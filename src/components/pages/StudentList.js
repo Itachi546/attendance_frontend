@@ -15,14 +15,9 @@ export default class StudentList extends Component {
                 res.json()
             ))
             .then(json => {
-                let result = [];
-                json.forEach(element => {
-                    if(result.indexOf(element.name) < 0)
-                        result.push(element.name);
-                });
                 this.setState({
                     ...this.state,
-                    class: result
+                    class: json.map((val)=>val.class)
                 });
                 return json;
             })

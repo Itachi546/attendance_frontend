@@ -13,7 +13,6 @@ export default class SubjectReport extends Component {
         fetch(url + `attendance/${data.subjectCode}/${data.instructor}`)
             .then(res => res.json())
             .then(json => {
-                console.log(json);
                 this.setState({
                     data: json.map(val=>{
                         return {
@@ -33,10 +32,13 @@ export default class SubjectReport extends Component {
 
     render() {
         const data = this.props.location.state;
-        console.log(this.state.data[0]);
         return (
             this.state.data.length > 0 ? (
                 <div className="container">
+                    <h6 className="text-left mt-3">Instructor: {data.instructor} </h6>
+                    <h6 className="text-left mt-3">Class: {data.class}    Year: {data.year}  Part: {data.part} </h6>
+                    <h6 className="text-left mt-3">Subject: {data.subject} </h6>
+
                     <div className="container-fluid border border-color-dark mt-5 w-80 h-50">
                         <Line
                             width={600}
