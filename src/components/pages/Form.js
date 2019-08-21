@@ -14,7 +14,7 @@ export default class Form extends Component {
                 <MDBRow>
                     <MDBCol md="6">
                         <form >
-                            <p className="h3 text-center mb-4 mt-5">Sign in</p>
+                            <p className="h3 text-center mb-4 mt-5">Change Password</p>
                             <div className="grey-text">
                                 <MDBInput
                                     label="Old password"

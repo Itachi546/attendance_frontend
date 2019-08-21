@@ -30,7 +30,6 @@ function App() {
 
         <Route path='/classes' render={props => (
           <ClassList {...props} onClickRow={(classDetail) => {
-            const {year, part } = classDetail;
             console.log(classDetail);
             const name = classDetail.class;
             fetch(url + `subject/${name}`)
