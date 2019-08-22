@@ -5,10 +5,9 @@ export default class Form extends Component {
     state = {
         oldPassword: '',
         newPassword: '',
-        errorMsg:''
+        msg: ''
     }
     render() {
-        console.log(this.state.errorMsg)
         return (
             <MDBContainer className="container-fluid">
                 <MDBRow>
@@ -41,11 +40,6 @@ export default class Form extends Component {
                             </div>
                             <div className="text-center">
                                 <MDBBtn color="success" onClick={() => {
-                                    if(this.state.newPassword.length === 0 && this.state.oldPassword.length === 0){
-                                        this.setState({
-                                            errorMsg:'No password'
-                                        })
-                                    }
                                     fetch(url + 'password', {
                                         method: 'POST',
                                         headers: {
@@ -56,8 +50,17 @@ export default class Form extends Component {
                                             new: this.state.newPassword
                                         })
                                     })
+                                    .then(res=>{
+                                        return res.json();
+                                    })
+                                    .then(json=>{
+                                        this.setState({
+                                            msg:json.msg
+                                        })
+                                    })
                                 }}>Change</MDBBtn>
                             </div>
+                            <h5>{this.state.msg}</h5>
                         </form>
                     </MDBCol>
                 </MDBRow>
