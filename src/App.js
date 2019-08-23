@@ -38,7 +38,7 @@ function App() {
               })
               .then(json => {
                 props.history.push({
-                  pathname: '/subjectlist',
+                  pathname: '/subjectList',
                   state: [classDetail, json]
                 })
               })
@@ -49,7 +49,7 @@ function App() {
           }} />
         )} />
 
-        <Route exact path='/subjectlist' render={props => (
+        <Route exact path='/subjectList' render={props => (
           <SubjectList {...props} onClickRow={(subjectDetail) => {
             console.log(subjectDetail);
             props.history.push({

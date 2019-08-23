@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.19cdae2b.chunk.css",
+    "main.js": "/static/js/main.aaa7b02e.chunk.js",
+    "main.js.map": "/static/js/main.aaa7b02e.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.9a6bcd35.chunk.css": "/static/css/2.9a6bcd35.chunk.css",
+    "static/js/2.f40e3903.chunk.js": "/static/js/2.f40e3903.chunk.js",
+    "static/js/2.f40e3903.chunk.js.map": "/static/js/2.f40e3903.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.4e297fc053317613173c076fcb74c899.js": "/precache-manifest.4e297fc053317613173c076fcb74c899.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.9a6bcd35.chunk.css.map": "/static/css/2.9a6bcd35.chunk.css.map",
+    "static/css/main.19cdae2b.chunk.css.map": "/static/css/main.19cdae2b.chunk.css.map",
+    "static/media/mdb.css": "/static/media/arrow_right.8ef6a08c.svg",
+    "static/media/all.min.css": "/static/media/fa-solid-900.f14c3b2f.ttf"
+  }
+}
